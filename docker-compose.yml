@@ -1,0 +1,18 @@
+services:
+#  dev-console:
+#    image: ubuntu:latest
+#    command: sh
+#    stdin_open: true
+#    tty: true
+#    volumes:
+#      - /dev-console-data
+
+  user_api:
+    image: ${DOCKER_REGISTRY-}usermsvc
+    build:
+      context: Services/UserMsvc
+      dockerfile: Dockerfile
+
+
+  user_pgdb:
+    image: postgres:16.2-alpine

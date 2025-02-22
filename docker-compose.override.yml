@@ -1,0 +1,32 @@
+services:
+  user_pgdb:
+    hostname: userpgdb
+    container_name: user_pgdb
+    environment:
+      - POSTGRES_USER=userdbadmin
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=userdb
+      - POSTGRES_PORT=5433
+    ports:
+      - "5433:5433"
+    volumes:
+      - ./Services/UserMsvc/docker/postgresql:/data
+    command: -p 5433
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U userdbadmin -d userdb -p 5433" ]
+      interval: 1s
+      timeout: 5s
+      retries: 10
+
+
+  user_api:
+    hostname: userapi
+    environment:
+      - POSTGRES_USER=userdbadmin
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=userdb
+      - POSTGRES_PORT=5433
+      - POSTGRES_HOST=userpgdb
+    depends_on:
+      user_pgdb:
+        condition: service_healthy

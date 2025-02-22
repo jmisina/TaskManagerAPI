@@ -1,0 +1,28 @@
+info:
+  author: Jakub Misina
+  date-created: 16-02-2025
+  swagger-link: http://localhost:8011/api/swagger-ui/index.html#/
+
+
+spring:
+  sql:
+    init:
+      mode: never
+
+  application:
+    name: UserMsvc
+
+  datasource:
+    url: jdbc:postgresql://${POSTGRES_HOST:userpgdb}:${POSTGRES_PORT:5433}/${POSTGRES_DATABASE:userdb}
+    username: ${POSTGRES_USER:userdbadmin}
+    password: ${POSTGRES_PASSWORD:admin}
+    driver-class-name: org.postgresql.Driver
+
+  flyway:
+    locations: "classpath:db/migration"
+    enabled: true
+    url: jdbc:postgresql://${POSTGRES_HOST:userpgdb}:${POSTGRES_PORT:5433}/${POSTGRES_DATABASE:userdb}
+    user: ${POSTGRES_USER:userdbadmin}
+    password: ${POSTGRES_PASSWORD:admin}
+    driver-class-name: org.postgresql.Driver
+

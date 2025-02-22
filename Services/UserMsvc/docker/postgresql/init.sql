@@ -1,0 +1,3 @@
+CREATE DATABASE userdb;
+GRANT ALL PRIVILEGES ON DATABASE userdb TO userdbadmin;
+ALTER DATABASE userdb OWNER TO userdbadmin;
